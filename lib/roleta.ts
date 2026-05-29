@@ -20,16 +20,16 @@ export type Fatia = {
 //          0       1       2        3        4       5        6        7        8       9
 // Conta: 1 coxinha ✓ | 2 squeezy ✓ | 3 caneta ✓ | 4 nao_foi ✓
 export const FATIAS: Fatia[] = [
-  { id: 'nao_foi', label: 'Não foi dessa vez', emoji: '🍃', cor: '#E8E2D3', corTexto: '#2F4A36' },
-  { id: 'caneta',  label: 'Caneta',            emoji: '✒️', cor: '#D88A4E', corTexto: '#3A1F0F' },
-  { id: 'nao_foi', label: 'Não foi dessa vez', emoji: '🍃', cor: '#E8E2D3', corTexto: '#2F4A36' },
-  { id: 'squeezy', label: 'Squeezy',           emoji: '💧', cor: '#5B8F6A', corTexto: '#FFF8E7' },
-  { id: 'nao_foi', label: 'Não foi dessa vez', emoji: '🍃', cor: '#E8E2D3', corTexto: '#2F4A36' },
-  { id: 'caneta',  label: 'Caneta',            emoji: '✒️', cor: '#D88A4E', corTexto: '#3A1F0F' },
-  { id: 'coxinha', label: 'COXINHA!',          emoji: '🍗', cor: '#C9442B', corTexto: '#FFF8E7' },
-  { id: 'nao_foi', label: 'Não foi dessa vez', emoji: '🍃', cor: '#E8E2D3', corTexto: '#2F4A36' },
-  { id: 'caneta',  label: 'Caneta',            emoji: '✒️', cor: '#D88A4E', corTexto: '#3A1F0F' },
-  { id: 'squeezy', label: 'Squeezy',           emoji: '💧', cor: '#5B8F6A', corTexto: '#FFF8E7' },
+  { id: 'nao_foi', label: 'Não foi dessa vez', emoji: '🍃', cor: '#F0E9D2', corTexto: '#2A7530' },
+  { id: 'caneta',  label: 'Caneta',            emoji: '✒️', cor: '#F7AB3D', corTexto: '#3A2510' },
+  { id: 'nao_foi', label: 'Não foi dessa vez', emoji: '🍃', cor: '#F0E9D2', corTexto: '#2A7530' },
+  { id: 'squeezy', label: 'Squeezy',           emoji: '💧', cor: '#349138', corTexto: '#FFF8E7' },
+  { id: 'nao_foi', label: 'Não foi dessa vez', emoji: '🍃', cor: '#F0E9D2', corTexto: '#2A7530' },
+  { id: 'caneta',  label: 'Caneta',            emoji: '✒️', cor: '#F7AB3D', corTexto: '#3A2510' },
+  { id: 'coxinha', label: 'COXINHA!',          emoji: '🍗', cor: '#F39200', corTexto: '#FFF8E7' },
+  { id: 'nao_foi', label: 'Não foi dessa vez', emoji: '🍃', cor: '#F0E9D2', corTexto: '#2A7530' },
+  { id: 'caneta',  label: 'Caneta',            emoji: '✒️', cor: '#F7AB3D', corTexto: '#3A2510' },
+  { id: 'squeezy', label: 'Squeezy',           emoji: '💧', cor: '#349138', corTexto: '#FFF8E7' },
 ];
 
 export const TOTAL_FATIAS = FATIAS.length; // 10
