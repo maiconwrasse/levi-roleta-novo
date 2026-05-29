@@ -1,8 +1,11 @@
 'use client';
 
-import { useState, FormEvent } from 'react';
+import { useState, useEffect, FormEvent } from 'react';
 import Roleta from '@/components/Roleta';
 import type { PremioId } from '@/lib/roleta';
+
+// Segundos até voltar sozinho pro formulário, caso a pessoa esqueça de clicar
+const SEGUNDOS_AUTO_RESET = 30;
 
 type Etapa = 'form' | 'roleta' | 'resultado';
 
@@ -35,6 +38,40 @@ export default function Home() {
   const [premio, setPremio] = useState<PremioId | null>(null);
   const [enviando, setEnviando] = useState(false);
   const [erro, setErro] = useState<string | null>(null);
+  const [contadorReset, setContadorReset] = useState(SEGUNDOS_AUTO_RESET);
+
+  // Volta pro formulário (próxima pessoa). useState com `key` força re-render
+  // do <form>, o que limpa todos os campos sem precisar resetar manualmente.
+  const [formKey, setFormKey] = useState(0);
+  function reiniciar() {
+    setEtapa('form');
+    setLeadId(null);
+    setPremio(null);
+    setEnviando(false);
+    setErro(null);
+    setContadorReset(SEGUNDOS_AUTO_RESET);
+    setFormKey((k) => k + 1); // remonta o form → limpa tudo
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  // Quando chega na tela de resultado, começa contagem regressiva pra auto-reset
+  useEffect(() => {
+    if (etapa !== 'resultado') return;
+    setContadorReset(SEGUNDOS_AUTO_RESET);
+
+    const intervalo = setInterval(() => {
+      setContadorReset((s) => {
+        if (s <= 1) {
+          clearInterval(intervalo);
+          reiniciar();
+          return 0;
+        }
+        return s - 1;
+      });
+    }, 1000);
+
+    return () => clearInterval(intervalo);
+  }, [etapa]);
 
   async function handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -81,9 +118,11 @@ export default function Home() {
   return (
     <main className="shell">
       <header className="brand">
-        <h1>Lévi</h1>
-        <span className="line">Linha Fit</span>
-        <span className="complex">Complexo 34</span>
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img src="/logo-levi.svg" alt="Lévi - Linha Fit" className="logo-levi" />
+        <span className="divisor" aria-hidden="true" />
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img src="/logo-34.svg" alt="Complexo 34" className="logo-34" />
       </header>
 
       {etapa === 'form' && (
@@ -95,7 +134,7 @@ export default function Home() {
             Preencha o formulário e leve sua chance de ganhar uma coxinha, squeezy, caneta ou outras surpresas.
           </p>
 
-          <form onSubmit={handleSubmit} noValidate>
+          <form key={formKey} onSubmit={handleSubmit} noValidate>
             {/* Seção 1 — Seus dados */}
             <section className="section">
               <h3 className="section-title">
@@ -285,6 +324,18 @@ export default function Home() {
               📲 @levicomidasaudavel
             </a>
           </div>
+
+          <button
+            type="button"
+            className="btn-proxima"
+            onClick={reiniciar}
+          >
+            👉 Próxima pessoa
+          </button>
+
+          <p className="auto-reset">
+            Reiniciando automaticamente em <strong>{contadorReset}s</strong>
+          </p>
         </div>
       )}
     </main>
