@@ -1,12 +1,13 @@
 :root {
-  /* Paleta — verde profundo + terracota + creme. Inspirada em ervas, terra e papel. */
-  --verde-escuro:  #1F3A2D;
-  --verde-medio:   #2F4A36;
-  --verde-folha:   #5B8F6A;
-  --terracota:     #C9442B;
-  --laranja-suave: #D88A4E;
+  /* Paleta oficial Lévi — laranja vibrante + verde fresco + creme */
+  --verde-escuro:  #2A7530;
+  --verde-medio:   #349138;
+  --verde-folha:   #4FA855;
+  --laranja:       #F39200;
+  --laranja-claro: #F7AB3D;
+  --laranja-escuro: #C97600;
   --creme:         #FFF8E7;
-  --creme-escuro:  #E8E2D3;
+  --creme-escuro:  #F0E9D2;
   --tinta:         #1A1410;
   --erro:          #B83A2A;
 
@@ -40,7 +41,7 @@ input, select, textarea {
 
 a { color: inherit; }
 
-::selection { background: var(--terracota); color: var(--creme); }
+::selection { background: var(--laranja); color: var(--creme); }
 
 /* Container principal */
 .shell {
@@ -56,32 +57,35 @@ a { color: inherit; }
 /* Cabeçalho da marca */
 .brand {
   display: flex;
-  align-items: baseline;
-  gap: 14px;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18px;
   margin-bottom: 36px;
-  padding-bottom: 20px;
-  border-bottom: 1px solid rgba(31,58,45,0.18);
+  padding-bottom: 24px;
+  border-bottom: 1px solid rgba(52,145,56,0.18);
 }
-.brand h1 {
-  font-family: var(--fonte-display);
-  font-size: clamp(2rem, 5vw, 2.8rem);
-  font-weight: 400;
-  letter-spacing: -0.02em;
-  margin: 0;
-  color: var(--verde-escuro);
+.brand .logo-levi {
+  height: 64px;
+  width: auto;
+  display: block;
 }
-.brand .line {
-  font-style: italic;
-  font-family: var(--fonte-display);
-  font-size: 1.1rem;
-  color: var(--terracota);
+.brand .logo-34 {
+  height: 56px;
+  width: auto;
+  display: block;
+  opacity: 0.95;
 }
-.brand .complex {
-  margin-left: auto;
-  font-size: 0.78rem;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
-  color: var(--verde-medio);
+.brand .divisor {
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(to right, transparent, rgba(52,145,56,0.25), transparent);
+  margin: 0 8px;
+}
+
+@media (max-width: 540px) {
+  .brand .logo-levi { height: 52px; }
+  .brand .logo-34 { height: 44px; }
+  .brand .divisor { display: none; }
 }
 
 /* Chamada principal */
@@ -93,7 +97,7 @@ a { color: inherit; }
   margin: 0 0 8px;
   letter-spacing: -0.01em;
 }
-.hero em { color: var(--terracota); font-style: italic; }
+.hero em { color: var(--laranja); font-style: italic; }
 .hero-sub {
   color: var(--verde-medio);
   font-size: 1rem;
@@ -147,7 +151,7 @@ label {
   color: var(--verde-medio);
   margin-bottom: 6px;
 }
-label .req { color: var(--terracota); margin-left: 2px; }
+label .req { color: var(--laranja); margin-left: 2px; }
 
 input[type="text"],
 input[type="email"],
@@ -201,7 +205,7 @@ input::placeholder { color: rgba(31,58,45,0.4); }
   content: '';
   position: absolute;
   inset: 2px;
-  background: var(--terracota);
+  background: var(--laranja);
   border-radius: 50%;
 }
 .option:has(input:checked) {
@@ -317,7 +321,7 @@ input::placeholder { color: rgba(31,58,45,0.4); }
 .btn-girar {
   margin-top: 32px;
   padding: 16px 48px;
-  background: var(--terracota);
+  background: var(--laranja);
   color: var(--creme);
   border: none;
   border-radius: 999px;
@@ -358,7 +362,7 @@ input::placeholder { color: rgba(31,58,45,0.4); }
   margin: 0 0 8px;
   color: var(--verde-escuro);
 }
-.resultado.win h2 { color: var(--terracota); }
+.resultado.win h2 { color: var(--laranja); }
 .resultado p {
   color: var(--verde-medio);
   margin: 0;
@@ -374,4 +378,43 @@ input::placeholder { color: rgba(31,58,45,0.4); }
   border-radius: 999px;
   font-size: 0.9rem;
   font-weight: 600;
+}
+
+/* Botão "Próxima pessoa" — bem grande pra fácil toque no tablet */
+.btn-proxima {
+  margin-top: 28px;
+  padding: 22px 56px;
+  background: var(--verde-escuro);
+  color: var(--creme);
+  border: none;
+  border-radius: 999px;
+  font-family: var(--fonte-display);
+  font-size: 1.5rem;
+  letter-spacing: 0.02em;
+  cursor: pointer;
+  transition: transform 0.12s, background 0.15s;
+  box-shadow: 0 5px 0 var(--verde-medio);
+  min-width: 280px;
+}
+.btn-proxima:hover {
+  background: var(--verde-medio);
+  transform: translateY(-1px);
+  box-shadow: 0 6px 0 var(--verde-escuro);
+}
+.btn-proxima:active {
+  transform: translateY(2px);
+  box-shadow: 0 3px 0 var(--verde-medio);
+}
+
+.auto-reset {
+  margin-top: 18px;
+  font-size: 0.88rem;
+  color: var(--verde-medio);
+  opacity: 0.7;
+  font-style: italic;
+}
+.auto-reset strong {
+  color: var(--laranja);
+  font-style: normal;
+  font-weight: 700;
 }
